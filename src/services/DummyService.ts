@@ -28,7 +28,7 @@ export class DummyService {
     data.reduce((prev, cur) => (cur.id > prev ? cur.id : prev), -1)
   )
 
-  public createProject = (name: string, description: string, owner: number) => new Promise<boolean>(
+  public createProject = (name: string, description: string, owner: number) => new Promise<Project>(
     (resolve, reject) => {
       if (name && description && owner in this.users) {
         const project = {
@@ -38,7 +38,7 @@ export class DummyService {
           owner
         }
         this.projects.push(project)
-        resolve(true)
+        resolve(project)
       }
       else {
         reject(new Error(this.errorPost))
@@ -46,7 +46,7 @@ export class DummyService {
     }
   )
 
-  public createUser = (name: string, email: string) => new Promise<boolean>(
+  public createUser = (name: string, email: string) => new Promise<User>(
     (resolve, reject) => {
       if (email && name) {
         const user = {
@@ -55,7 +55,7 @@ export class DummyService {
           email
         }
         this.users.push(user)
-        resolve(true)
+        resolve(user)
       }
       else {
         reject(new Error(this.errorPost))
@@ -63,14 +63,14 @@ export class DummyService {
     }
   )
 
-  public editProject = ({ id, name, description, owner }: Project) => new Promise<boolean>(
+  public editProject = ({ id, name, description, owner }: Project) => new Promise<Project>(
     (resolve, reject) => {
       if (id in this.projects) {
         const project = { id, name, description, owner }
         this.projects = this.projects.map(v =>
           v.id === project.id ? project : v
         )
-        resolve(true)
+        resolve(project)
       }
       else {
         reject(new Error(this.errorPut))
