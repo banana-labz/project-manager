@@ -1,9 +1,9 @@
 import { User, Project } from "../entities"
-
+import { BaseService } from "./BaseService"
 type PromiseAll<T> = () => Promise<T[]>
 type PromiseOne<T> = (id: number) => Promise<T>
 
-export class DummyService {
+export class DummyService implements BaseService {
   private maxDelay: number = 3000
   private errorProbability: number = 0.1
   private errorGet: string = "We didn't manage to get something, sorry"
@@ -78,7 +78,7 @@ export class DummyService {
     }
   )
 
-  private promiseData = <T>(data: T): Promise<T> => new Promise(
+  private promiseData = <T>(data: T): Promise<T> => new Promise<T>(
     (resolve, reject) => {
       setTimeout(() => {
         Math.random() < this.errorProbability

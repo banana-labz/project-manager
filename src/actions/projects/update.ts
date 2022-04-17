@@ -1,18 +1,18 @@
 import { ActionCreator } from "redux"
 
-import { ProjectActions } from "./types"
+import { ProjectsActions } from "./types"
 
 import { Project } from "../../entities"
 
-type AProjectsCreate = { type: ProjectActions.PROJECT_CREATE, payload: Project }
-type AProjectsEdit = { type: ProjectActions.PROJECT_EDIT, payload: Project }
+type AProjectsCreate = { type: ProjectsActions.PROJECT_CREATE, payload: Project }
+type AProjectsEdit = { type: ProjectsActions.PROJECT_EDIT, payload: Project }
 
 export const projectsCreate: ActionCreator<AProjectsCreate> = project => ({
-  type: ProjectActions.PROJECT_CREATE,
+  type: ProjectsActions.PROJECT_CREATE,
   payload: project
 })
 export const projectsEdit: ActionCreator<AProjectsEdit> = project => ({
-  type: ProjectActions.PROJECT_EDIT,
+  type: ProjectsActions.PROJECT_EDIT,
   payload: project
 })
 

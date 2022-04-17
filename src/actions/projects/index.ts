@@ -4,12 +4,18 @@ import { AProjectsFetch } from "./fetch"
 import { AProjectsUpdate } from "./update"
 
 import { projectsRequest, projectsSuccess, projectsFailure } from "./fetch"
-import { projectsCreate, projectsEdit } from "./update"
 
-export { ProjectActions } from "./types"
+import service from "../../services"
+
+export { ProjectsActions } from "./types"
 
 export type AProjects = AProjectsFetch | AProjectsUpdate
 
-const projectsFetch = () => (dispatch: Dispatch) => {
-  //projectsRequest, projectsSuccess, projectsFailure
+export const projectsFetch = () => (dispatch: Dispatch<AProjects>) => {
+  dispatch(projectsRequest())
+  service.getAllProjects()
+    .then(data => dispatch(projectsSuccess(data)))
+    .catch(err => dispatch(projectsFailure(err)))
 }
+
+export { projectsCreate, projectsEdit } from "./update"
