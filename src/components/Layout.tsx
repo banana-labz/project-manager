@@ -13,6 +13,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
   </>
 )
 
-const mainStyle = { 
+const mainStyle = {
   padding: "20px",
 }

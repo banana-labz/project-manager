@@ -1,0 +1,1 @@
+export { Table as Projects } from "./Table"
