@@ -1,9 +1,13 @@
 import { Typography } from "@mui/material"
 
+import { Layout } from "../components/Layout"
+
 const ProjectsPage = () => (
-  <Typography>
-    Projects
-  </Typography>
+  <Layout>
+    <Typography>
+      Projects
+    </Typography>
+  </Layout>
 )
 
 export default ProjectsPage
