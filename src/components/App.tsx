@@ -14,7 +14,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/projects"/>}/>
-          <Route path="/projects" element={<ProjectsPage/>}/>
+          <Route path="projects/*" element={<ProjectsPage/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

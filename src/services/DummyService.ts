@@ -21,22 +21,24 @@ export class DummyService implements BaseService {
     { id: 1, name: "Some project", owner: 0, description: "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text." },
     { id: 2, name: "And another one", owner: 1, description: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC." },
     { id: 3, name: "Project", owner: 2, description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
-    { id: 4, name: "Project with noticeably larger name", owner: 3, description: "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like) If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text." },
+    { id: 4, name: "Project with noticeably larger name", owner: 3, description: "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)" },
   ]
 
   private findMaxId = (data: { id: number }[]): number => (
     data.reduce((prev, cur) => (cur.id > prev ? cur.id : prev), -1)
   )
 
-  public createProject = (name: string, description: string, owner: number) => new Promise<Project>(
+  public createProject = (name: string, description: string, owner: string) => new Promise<Project>(
     (resolve, reject) => {
-      if (name && description && owner in this.users) {
+      const ownerData = this.users.find(user => user.name === owner)
+      if (name && description && ownerData) {
         const project = {
           id: this.findMaxId(this.projects) + 1,
           name,
           description,
-          owner
+          owner: ownerData.id
         }
+        this.projects = [...this.projects]
         this.projects.push(project)
         resolve(project)
       }
@@ -54,6 +56,7 @@ export class DummyService implements BaseService {
           name,
           email
         }
+        this.users = [...this.users]
         this.users.push(user)
         resolve(user)
       }

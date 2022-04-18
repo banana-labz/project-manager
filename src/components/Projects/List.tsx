@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useActions } from "react-redux-actions-hook"
 import { CircularProgress, Box } from "@mui/material"
 
+import { filter } from "./filter"
 import { Card } from "./Card"
 
 import { projectsFetch, usersFetch } from "../../actions"
 import { useUsers, useProjects } from "../../hooks"
-
-
 type ListProps = {
   pattern: string
 }
@@ -34,13 +33,17 @@ export const List = ({ pattern }: ListProps) => {
   }
 
   if (users.loading || projects.loading) {
-    return <CircularProgress/>
+    return( 
+      <Box sx={style.spinner}>
+        <CircularProgress/>
+      </Box>
+    )
   }
 
   return (
     <Box sx={style.container}>
       <Card id={-1} name="Project" ownerName="Owner" description="Description"/>
-      {projects.items.map(({ owner, ...other }) => {
+      {filter(projects.items, pattern).map(({ owner, ...other }) => {
         const ownerData = users.items.find((user) => user.id === owner)
         return (
           <Card
@@ -60,5 +63,8 @@ const style = {
     display: "flex",
     flexDirection: "column",
     gap: "10px"
+  },
+  spinner: {
+    alignSelf: "center"
   }
 }
