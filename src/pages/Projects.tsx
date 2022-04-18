@@ -5,10 +5,8 @@ import { Layout } from "../components/Layout"
 import { Projects } from "../components/Projects"
 
 const ProjectsPage = () => (
-  <Layout>
-    <Typography>
-      <Projects/>
-    </Typography>
+  <Layout padding="10px 15% 10px 15%">
+    <Projects/>
   </Layout>
 )
 

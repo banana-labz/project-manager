@@ -20,5 +20,5 @@ const App = () => (
     </ThemeProvider>
   </ReduxProvider>
 )
-
+ 
 export default App

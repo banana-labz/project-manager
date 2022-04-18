@@ -1,1 +1,1 @@
-export { Table as Projects } from "./Table"
+export { Projects } from "./Projects"

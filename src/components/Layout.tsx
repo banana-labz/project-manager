@@ -1,18 +1,21 @@
 import React from "react"
 
 import { Box } from "@mui/material"
+import { CSSProperties } from "@mui/styled-engine"
 
 import { Header } from "./Header"
 
-export const Layout = ({ children }: { children: React.ReactNode }) => (
+
+type LayoutProps = {
+  children: React.ReactNode,
+  padding?: CSSProperties["padding"]
+}
+
+export const Layout = ({ padding, children }: LayoutProps) => (
   <>
     <Header/>
-    <Box sx={mainStyle}>
+    <Box sx={{ padding: padding || "20px" }}>
       {children}
     </Box>
   </>
 )
-
-const mainStyle = {
-  padding: "20px",
-}
