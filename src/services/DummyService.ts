@@ -28,6 +28,13 @@ export class DummyService implements BaseService {
     data.reduce((prev, cur) => (cur.id > prev ? cur.id : prev), -1)
   )
 
+  public isEmailUnique = (email: string) => new Promise<boolean>(
+    (resolve, reject) => {
+      const emails = this.users.map(user => user.email)
+      resolve(!emails.find(i => i === email))
+    }
+  )
+
   public createProject = (name: string, description: string, owner: string) => new Promise<Project>(
     (resolve, reject) => {
       const ownerData = this.users.find(user => user.name === owner)

@@ -10,3 +10,4 @@ service.createProject("project1", "testproj", "ILYA").then(console.log)
 service.createUser("therion", "strike201420141@gmail.com").then(console.log)
 
 service.editProject({ id: 2, name: "Project2", description: "description2", owner: 2 }).then(console.log)
+service.isEmailUnique("email1@mail.com")

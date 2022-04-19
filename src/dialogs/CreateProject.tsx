@@ -1,12 +1,11 @@
 import React from "react"
 
-import { Button, TextField } from "@mui/material"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useActions } from "react-redux-actions-hook"
+import { Button, TextField } from "@mui/material"
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material"
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 
-import { ModalProps } from "./ModalProps"
 import { useUsers } from "../hooks"
 import { projectsCreate } from "../actions"
 import { useCreateProjectModalContext } from  "../context"
@@ -19,16 +18,12 @@ const initialOwner = ""
 
 export const CreateProject = () => {
   const [name, setName] = useState<string>(initialName)
-  const [description, setDescription] = useState(initialDescription)
+  const [description, setDescription] = useState<string>(initialDescription)
   const [owner, setOwner] = useState<string>(initialOwner)
-
-  const { isOpen, onClose } = useCreateProjectModalContext()
   const { items: users, loading } = useUsers()
-  
+  const { isOpen, onClose } = useCreateProjectModalContext()
   //
-
   const createProject = useActions(projectsCreate)
-
   const handleSetName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
@@ -38,21 +33,18 @@ export const CreateProject = () => {
   const handleSetDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(event.target.value)
   }
-
   const handleClose = () => {
     setName(initialName)
     setDescription(initialDescription)
     setOwner(initialOwner)
     onClose()
   }
-
   const handleSave = () => {
-    if (!loading) {
+    if (!loading && name && description && owner) {
       service.createProject(name, description, owner).then(createProject)
       handleClose()
     }
   }
-
   //
 
   return (
