@@ -8,7 +8,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material
 
 import { useUsers } from "../hooks"
 import { projectsCreate } from "../actions"
-import { useCreateProjectModalContext } from  "../context"
+import { useCreateProjectDialogContext } from  "../context"
 
 import service from "../services"
 
@@ -21,7 +21,7 @@ export const CreateProject = () => {
   const [description, setDescription] = useState<string>(initialDescription)
   const [owner, setOwner] = useState<string>(initialOwner)
   const { items: users } = useUsers()
-  const { isOpen, onClose } = useCreateProjectModalContext()
+  const { isOpen, onClose } = useCreateProjectDialogContext()
   //
   const createProject = useActions(projectsCreate)
   const handleSetName = (event: React.ChangeEvent<HTMLInputElement>) => {

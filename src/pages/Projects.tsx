@@ -6,27 +6,27 @@ import { useSwitch } from "../hooks"
 
 import { Layout } from "../components/Layout"
 import { Projects } from "../components/Projects"
-import { CreateProjectModalContext, EditProjectModalContext, CreateUserModalContext } from "../context"
+import { CreateProjectDialogContext, EditProjectDialogContext, CreateUserDialogContext } from "../context"
 
 
 export const ProjectsPage = () => {
-  const [isCreateProjectModalOpen, openCreateProjectModal , closeCreateProjectModal] = useSwitch(false)
+  const [isCreateProjectDialogOpen, openCreateProjectDialog , closeCreateProjectDialog] = useSwitch(false)
   
-  const [isEditProjectModalOpen, openEditProjectModal , closeEditProjectModal] = useSwitch(false)
+  const [isEditProjectDialogOpen, openEditProjectDialog , closeEditProjectDialog] = useSwitch(false)
   const [editedProjectId, setEditedProjectId] = useState<number>(0)
   
-  const [isCreateUserModalOpen, openCreateUserModal , closeCreateUserModal] = useSwitch(false)
+  const [isCreateUserDialogOpen, openCreateUserDialog , closeCreateUserDialog] = useSwitch(false)
 
   const createProjectContextValue = {
-    isOpen: isCreateProjectModalOpen,
-    onOpen: openCreateProjectModal,
-    onClose: closeCreateProjectModal
+    isOpen: isCreateProjectDialogOpen,
+    onOpen: openCreateProjectDialog,
+    onClose: closeCreateProjectDialog
   }
 
   const editProjectContextValue = {
-    isOpen: isEditProjectModalOpen,
-    onOpen: openEditProjectModal,
-    onClose: closeEditProjectModal,
+    isOpen: isEditProjectDialogOpen,
+    onOpen: openEditProjectDialog,
+    onClose: closeEditProjectDialog,
     
     id: editedProjectId,
     setId: setEditedProjectId
@@ -34,20 +34,20 @@ export const ProjectsPage = () => {
   // first you set id, then you open it
 
   const createUserContextValue = {
-    isOpen: isCreateUserModalOpen,
-    onOpen: openCreateUserModal,
-    onClose: closeCreateUserModal
+    isOpen: isCreateUserDialogOpen,
+    onOpen: openCreateUserDialog,
+    onClose: closeCreateUserDialog
   }
 
   return (
     <Layout padding="10px 15% 10px 15%">
-      <CreateProjectModalContext.Provider value={createProjectContextValue}>
-        <EditProjectModalContext.Provider value={editProjectContextValue}>
-          <CreateUserModalContext.Provider value={createUserContextValue}>
+      <CreateProjectDialogContext.Provider value={createProjectContextValue}>
+        <EditProjectDialogContext.Provider value={editProjectContextValue}>
+          <CreateUserDialogContext.Provider value={createUserContextValue}>
             <Projects/>
-          </CreateUserModalContext.Provider>
-        </EditProjectModalContext.Provider>
-      </CreateProjectModalContext.Provider>
+          </CreateUserDialogContext.Provider>
+        </EditProjectDialogContext.Provider>
+      </CreateProjectDialogContext.Provider>
     </Layout>
   )
 }

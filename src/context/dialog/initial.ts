@@ -1,6 +1,6 @@
-import { ModalContext } from "./ModalContext"
+import { DialogContext } from "./DialogContext"
 
-const INITIAL: ModalContext = {
+const INITIAL: DialogContext = {
   isOpen: false,
   onOpen: () => {},
   onClose: () => {}

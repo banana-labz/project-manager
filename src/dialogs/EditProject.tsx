@@ -8,7 +8,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material
 
 import { useUsers, useProjects } from "../hooks"
 import { projectsEdit } from "../actions"
-import { useEditProjectModalContext } from  "../context"
+import { useEditProjectDialogContext } from  "../context"
 
 import service from "../services"
 
@@ -22,7 +22,7 @@ export const EditProject = () => {
   const [owner, setOwner] = useState<string>(initialOwner)
   const { items: projects } = useProjects()
   const { items: users } = useUsers()
-  const { isOpen, onClose, id } = useEditProjectModalContext()
+  const { isOpen, onClose, id } = useEditProjectDialogContext()
   //
   useEffect(() => {
     if (isOpen) {

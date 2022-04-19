@@ -9,7 +9,7 @@ import { CSSProperties } from "@mui/styled-engine"
 
 import EditIcon from "@mui/icons-material/Edit"
 
-import { useEditProjectModalContext } from "../../context"
+import { useEditProjectDialogContext } from "../../context"
 
 
 type CardProps = {
@@ -31,7 +31,7 @@ const Cell = ({ children }: CellProps) => (
 )
 
 export const Card = ({ id, name, description, ownerName, action }: CardProps) => {
-  const { onOpen, setId } = useEditProjectModalContext()
+  const { onOpen, setId } = useEditProjectDialogContext()
 
   const handleEdit = () => {
     setId(id)

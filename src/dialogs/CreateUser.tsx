@@ -6,7 +6,7 @@ import { useActions } from "react-redux-actions-hook"
 import { Button, TextField } from "@mui/material"
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 
-import { useCreateUserModalContext } from  "../context"
+import { useCreateUserDialogContext } from  "../context"
 import { usersCreate } from "../actions"
 
 import service from "../services"
@@ -20,7 +20,7 @@ export const CreateUser = () => {
   const [email, setEmail] = useState<string>(initialEmail)
   const [emailError, setEmailError] = useState<null | string>(null)
   //test@mail.com this one is not unique 
-  const { isOpen, onClose } = useCreateUserModalContext()
+  const { isOpen, onClose } = useCreateUserDialogContext()
   //
   const createUser = useActions(usersCreate)
   const handleSetName = (event: React.ChangeEvent<HTMLInputElement>) => {
