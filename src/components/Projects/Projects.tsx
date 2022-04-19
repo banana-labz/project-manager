@@ -6,16 +6,21 @@ import { Box, Button } from "@mui/material"
 import { List } from "./List"
 import { Search } from "./Search"
 
-import { useSwitch } from "../../hooks"
+import {
+  useCreateProjectModalContext, 
+  useEditProjectModalContext,
+  useCreateUserModalContext
+} from "../../context"
+
 import { CreateProject } from "../../dialogs"
-import { Routes } from "react-router-dom"
+
 
 export const Projects = () => {
   const [searchPattern, setSearchPattern] = useState<string>("")
 
-  const [isCreateProjectModalOpen, openCreateProjectModal , closeCreateProjectModal] = useSwitch(false)
-  const [isEditProjectModalOpen, openEditProjectModal , closeEditProjectModal] = useSwitch(false)
-  const [isCreateUserModalOpen, openCreateUserModal , closeCreateUserModal] = useSwitch(false)
+  const { onOpen: openCreateProjectModal } = useCreateProjectModalContext()
+  const { onOpen: openEditProjectModal } = useCreateProjectModalContext()
+  const { onOpen: openCreateUserModal } = useCreateProjectModalContext()
 
   return (
     <Box sx={style.container}>
@@ -25,7 +30,7 @@ export const Projects = () => {
         <Button variant="contained">Create user</Button>
       </Box>
       <List pattern={searchPattern}/>
-      <CreateProject open={isCreateProjectModalOpen} onClose={closeCreateProjectModal}/>
+      <CreateProject/>
     </Box>
   )
 }

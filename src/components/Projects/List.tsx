@@ -14,7 +14,7 @@ type ListProps = {
   pattern: string
 }
 
-export const List = ({ pattern }: ListProps) => {
+export const List = React.memo(({ pattern }: ListProps) => {
   const users = useUsers()
   const projects = useProjects()
 
@@ -56,7 +56,7 @@ export const List = ({ pattern }: ListProps) => {
       })}
     </Box>
   )
-}
+})
 
 const style = {
   container: {

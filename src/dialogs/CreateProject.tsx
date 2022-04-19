@@ -2,22 +2,26 @@ import React from "react"
 
 import { Button, TextField } from "@mui/material"
 import { useState, useEffect } from "react"
+import { useActions } from "react-redux-actions-hook"
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material"
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 
 import { ModalProps } from "./ModalProps"
 import { useUsers } from "../hooks"
 import { projectsCreate } from "../actions"
-import { useActions } from "react-redux-actions-hook"
+import { useCreateProjectModalContext } from  "../context"
 
 import service from "../services"
 
-export const CreateProject = ({ open, onClose }: ModalProps) => {
+export const CreateProject = () => {
   const [name, setName] = useState<string>("")
   const [description, setDescription] = useState("")
   const [owner, setOwner] = useState<string>("None")
-  
+
+  const { isOpen, onClose } = useCreateProjectModalContext()
   const { items: users, loading } = useUsers()
+  
+  //
 
   const createProject = useActions(projectsCreate)
 
@@ -45,8 +49,10 @@ export const CreateProject = ({ open, onClose }: ModalProps) => {
     }
   }
 
+  //
+
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>New project</DialogTitle>
       <DialogContent sx={style.content}>
         <TextField
