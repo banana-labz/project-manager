@@ -1,12 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 
 
 import { useState } from "react"
 import { useActions } from "react-redux-actions-hook"
-import { Button, InputLabel, TextField, FormControl, FormHelperText, Input } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 
-import { useUsers } from "../hooks"
 import { useCreateUserModalContext } from  "../context"
 import { usersCreate } from "../actions"
 
@@ -43,7 +42,7 @@ export const CreateUser = () => {
         setEmailError("Email is not unique")
         return
       }
-      
+
       if (name && email && !emailError) {
         service.createUser(name, email).then(createUser)
         handleClose()
