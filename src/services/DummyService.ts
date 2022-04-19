@@ -45,8 +45,7 @@ export class DummyService implements BaseService {
           description,
           owner: ownerData.id
         }
-        this.projects = [...this.projects]
-        this.projects.push(project)
+        this.projects = [...this.projects , project]
         resolve(project)
       }
       else {
@@ -63,8 +62,7 @@ export class DummyService implements BaseService {
           name,
           email
         }
-        this.users = [...this.users]
-        this.users.push(user)
+        this.users = [...this.users, user]
         resolve(user)
       }
       else {
@@ -73,10 +71,15 @@ export class DummyService implements BaseService {
     }
   )
 
-  public editProject = ({ id, name, description, owner }: Project) => new Promise<Project>(
+  public editProject = ({ id, name, description, owner }: Omit<Project, "owner"> & { owner: string }) => new Promise<Project>(
     (resolve, reject) => {
       if (id in this.projects) {
-        const project = { id, name, description, owner }
+        const ownerData = this.users.find(user => user.name === owner)
+        if (!ownerData) {
+          reject(new Error(this.errorPut))
+          return
+        }
+        const project = { id, name, description, owner: ownerData.id }
         this.projects = this.projects.map(v =>
           v.id === project.id ? project : v
         )

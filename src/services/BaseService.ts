@@ -7,7 +7,7 @@ export interface BaseService {
   isEmailUnique: (email: string) => Promise<boolean>
   createProject: (name: string, description: string, owner: string) => Promise<Project>
   createUser: (name: string, email: string) => Promise<User>
-  editProject: ({ id, name, description, owner }: Project) => Promise<Project>
+  editProject: ({ id, name, description, owner }: Omit<Project, "owner"> & { owner: string }) => Promise<Project>
   getUserById: PromiseOne<User>
   getAllUsers: PromiseAll<User>
   getProjectById: PromiseOne<Project>

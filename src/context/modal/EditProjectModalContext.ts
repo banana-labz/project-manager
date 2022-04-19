@@ -2,9 +2,21 @@ import { createContext, useContext } from "react"
 
 import { ModalContext } from "./ModalContext"
 
-import initialEditProjectModalContext from "./initial"
+interface EditProjectModalContext extends ModalContext {
+  id: number,
+  setId: (id: number) => void
+}
 
-export const EditProjectModalContext = createContext<ModalContext>(initialEditProjectModalContext)
+const initialContexet = {
+  isOpen: false,
+  onClose: () => { },
+  onOpen: () => { },
+
+  id: 0,
+  setId: (i: number) => { }
+}
+
+export const EditProjectModalContext = createContext<EditProjectModalContext>(initialContexet)
 
 export const useEditProjectModalContext = () => (
   useContext(EditProjectModalContext)
