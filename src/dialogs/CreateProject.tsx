@@ -13,10 +13,14 @@ import { useCreateProjectModalContext } from  "../context"
 
 import service from "../services"
 
+const initialName = ""
+const initialDescription = ""
+const initialOwner = ""
+
 export const CreateProject = () => {
-  const [name, setName] = useState<string>("")
-  const [description, setDescription] = useState("")
-  const [owner, setOwner] = useState<string>("None")
+  const [name, setName] = useState<string>(initialName)
+  const [description, setDescription] = useState(initialDescription)
+  const [owner, setOwner] = useState<string>(initialOwner)
 
   const { isOpen, onClose } = useCreateProjectModalContext()
   const { items: users, loading } = useUsers()
@@ -36,9 +40,9 @@ export const CreateProject = () => {
   }
 
   const handleClose = () => {
-    setName("")
-    setDescription("")
-    setOwner("None")
+    setName(initialName)
+    setDescription(initialDescription)
+    setOwner(initialOwner)
     onClose()
   }
 
