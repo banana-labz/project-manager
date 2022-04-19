@@ -8,13 +8,10 @@ import { Search } from "./Search"
 
 import {
   useCreateProjectModalContext, 
-  useEditProjectModalContext,
   useCreateUserModalContext
 } from "../../context"
 
-import { CreateProject } from "../../dialogs"
-import { CreateUser } from "../../dialogs/CreateUser"
-
+import { CreateProject, EditProject, CreateUser } from "../../dialogs"
 
 export const Projects = () => {
   const [searchPattern, setSearchPattern] = useState<string>("")
@@ -31,6 +28,7 @@ export const Projects = () => {
       </Box>
       <List pattern={searchPattern}/>
       <CreateProject/>
+      <EditProject/>
       <CreateUser/>
     </Box>
   )

@@ -31,6 +31,7 @@ export const ProjectsPage = () => {
     id: editedProjectId,
     setId: setEditedProjectId
   }
+  // first you set id, then you open it
 
   const createUserContextValue = {
     isOpen: isCreateUserModalOpen,

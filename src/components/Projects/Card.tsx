@@ -9,6 +9,8 @@ import { CSSProperties } from "@mui/styled-engine"
 
 import EditIcon from "@mui/icons-material/Edit"
 
+import { useEditProjectModalContext } from "../../context"
+
 
 type CardProps = {
   id: number
@@ -29,7 +31,12 @@ const Cell = ({ children }: CellProps) => (
 )
 
 export const Card = ({ id, name, description, ownerName, action }: CardProps) => {
-  const navigate = useNavigate()
+  const { onOpen, setId } = useEditProjectModalContext()
+
+  const handleEdit = () => {
+    setId(id)
+    onOpen()
+  }
 
   const renderActions = (bool: CardProps["action"]) => !!bool ? (
     <Cell>
@@ -37,7 +44,7 @@ export const Card = ({ id, name, description, ownerName, action }: CardProps) =>
         startIcon={<EditIcon/>}
         color="info"
         variant="outlined"
-        //sx={}
+        onClick={handleEdit}
         children="edit"
       />
     </Cell>

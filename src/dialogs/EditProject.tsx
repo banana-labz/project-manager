@@ -6,8 +6,8 @@ import { Button, TextField } from "@mui/material"
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material"
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 
-import { useUsers } from "../hooks"
-import { projectsCreate } from "../actions"
+import { useUsers, useProjects } from "../hooks"
+import { projectsEdit } from "../actions"
 import { useEditProjectModalContext } from  "../context"
 
 import service from "../services"
@@ -16,17 +16,30 @@ const initialName = ""
 const initialDescription = ""
 const initialOwner = ""
 
-export const CreateProject = () => {
+export const EditProject = () => {
   const [name, setName] = useState<string>(initialName)
   const [description, setDescription] = useState<string>(initialDescription)
   const [owner, setOwner] = useState<string>(initialOwner)
   const { items: projects } = useProjects()
-  useEffect
-  const { items: users, loading } = useUsers()
-
-  const { isOpen, onClose, id, setId } = useEditProjectModalContext()
+  const { items: users } = useUsers()
+  const { isOpen, onClose, id } = useEditProjectModalContext()
   //
-  const createProject = useActions(projectsCreate)
+  useEffect(() => {
+    if (isOpen) {
+      const project = projects.find(project => project.id === id)
+      if (project) {
+        setName(project.name)
+        setDescription(project.description)
+
+        const user = users.find(user => user.id === project.owner)
+        if (user) {
+          setOwner(user.name)
+        }
+      }
+    }
+  }, [isOpen])
+  //
+  const editProject = useActions(projectsEdit)
   const handleSetName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
@@ -43,8 +56,8 @@ export const CreateProject = () => {
     onClose()
   }
   const handleSave = () => {
-    if (!loading && id && name && description && owner) {
-      service.editProject({ id, name, description, owner }).then(createProject)
+    if (id && name && description && owner) {
+      service.editProject({ id, name, description, owner }).then(editProject)
       handleClose()
     }
   }
@@ -52,7 +65,7 @@ export const CreateProject = () => {
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>New project</DialogTitle>
+      <DialogTitle>Edit project</DialogTitle>
       <DialogContent sx={style.content}>
         <TextField
           label="Name"
@@ -63,6 +76,7 @@ export const CreateProject = () => {
         <TextField
           label="Description"
           type="text"
+          multiline
           value={description}
           onChange={handleSetDescription}
         />

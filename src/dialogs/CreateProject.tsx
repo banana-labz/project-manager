@@ -20,7 +20,7 @@ export const CreateProject = () => {
   const [name, setName] = useState<string>(initialName)
   const [description, setDescription] = useState<string>(initialDescription)
   const [owner, setOwner] = useState<string>(initialOwner)
-  const { items: users, loading } = useUsers()
+  const { items: users } = useUsers()
   const { isOpen, onClose } = useCreateProjectModalContext()
   //
   const createProject = useActions(projectsCreate)
@@ -40,7 +40,7 @@ export const CreateProject = () => {
     onClose()
   }
   const handleSave = () => {
-    if (!loading && name && description && owner) {
+    if (name && description && owner) {
       service.createProject(name, description, owner).then(createProject)
       handleClose()
     }
@@ -60,6 +60,7 @@ export const CreateProject = () => {
         <TextField
           label="Description"
           type="text"
+          multiline
           value={description}
           onChange={handleSetDescription}
         />

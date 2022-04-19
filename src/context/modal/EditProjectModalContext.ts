@@ -11,7 +11,6 @@ const initialContexet = {
   isOpen: false,
   onClose: () => { },
   onOpen: () => { },
-
   id: 0,
   setId: (i: number) => { }
 }
