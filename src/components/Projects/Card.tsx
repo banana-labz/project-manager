@@ -1,11 +1,7 @@
 import React from "react"
 
-import { useNavigate } from "react-router"
-import { useActions } from "react-redux-actions-hook"
-
-import { Grid, Box, Button, Typography } from "@mui/material"
+import { Grid, Button, Typography } from "@mui/material"
 import { Card as CardContainer } from "@mui/material"
-import { CSSProperties } from "@mui/styled-engine"
 
 import EditIcon from "@mui/icons-material/Edit"
 

@@ -4,8 +4,10 @@ import { Provider as ReduxProvider } from "react-redux"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { ThemeProvider } from "@mui/material/styles"
 
-import store from "../store"
 import ProjectsPage from "../pages/Projects"
+import ErrorPage from "../pages/Error"
+
+import store from "../store"
 import theme from "../style"
 
 const App = () => (
@@ -14,7 +16,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/projects"/>}/>
-          <Route path="projects/*" element={<ProjectsPage/>}/>
+          <Route path="projects" element={<ProjectsPage/>}/>
+          <Route path="error" element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
